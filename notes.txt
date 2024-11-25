@@ -1,0 +1,35 @@
+~~ State Variables ~~
+
+S - self-control
+C - craving
+
+If C=0 it does not require much effort to quit. If C>0 the person is addicted. Craving dies of slowly and becomes unlearned
+
+~~ Other variables ~~
+
+E - External control about the positive effect of societal measures. Peer pressure is an example of negative E. (Hyperparam)
+
+A - intensity of the frequency of addictive actions
+
+A = A(C - S - E)
+
+V - Addiction vulnerability
+
+V = C - S - E
+
+U - the degree of self control
+
+S+ - maximum self control? (Hyperparam)
+
+p - psychological resilience parameter
+
+~~ General Notes ~~
+
+dt = 1 week
+
+~~ Things that annoy me ~~
+
+"This may be justified by the fact that lifestyle exhibits a temporal cyclic pattern with
+a period of one week" with no citation lmao
+
+They don't introduce E till after they make a figure with it.
