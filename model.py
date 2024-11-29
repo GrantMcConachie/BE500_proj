@@ -58,13 +58,42 @@ def E_fn(E, dE=0.015):
     return E - dE
 
 
+def E_sinusodal(E, t, freq=52, var=0.1):
+    """
+    Change to a sinusodal E
+    """
+    # convert to radians
+    f = 2 * np.pi / freq
+
+    E = E + f * np.cos(f * t) * 0.9
+
+    # add a noise term
+    noise = stats.norm(0, var).rvs()
+
+    return E + noise
+
+
+def lam_sinusodal(lam, t, phase_shift=np.pi, freq=52, var=0.1):
+    """
+    Also making lambda sinusodal as well
+    """
+    f = 2 * np.pi / freq
+
+    lam = lam + f * np.cos(f * t + phase_shift)
+
+    noise = stats.norm(0, var).rvs()
+
+    return np.abs(lam + noise)
+
+
 def lam_fn(lam, dlam=0.01):
     return lam + dlam
 
 
 # running simulations
 stochastic = True
-fig_5 = True
+fig_5 = False
+sin_E = True
 C_vals = []
 S_vals = []
 lam_vals = []
@@ -76,10 +105,10 @@ V_vals = []
 C_0 = np.array([2/3])
 A_0 = np.array([4/5])
 S_0 = np.array([-1/3])
-E_0 = np.array([1.0])
+E_0 = np.array([1])
 V_0 = V_fn(C_0, S_0, E_0)
-lam_0 = np.array([0.5])
-t = 100  # weeks
+lam_0 = np.array([3])
+t = 500  # weeks
 
 # fig 5
 if fig_5:
@@ -101,8 +130,12 @@ for i in range(t):
         if fig_5:
             pass
         else:
-            E = E_fn(E)
-            lam = lam_fn(lam)
+            if sin_E:
+                E = E_sinusodal(E, i)
+                lam = lam_sinusodal(lam, i)
+            else:
+                E = E_fn(E)
+                lam = lam_fn(lam)
 
     V = V_fn(C, S, E)
     A = A_fn(V, stochastic=stochastic, lam=lam)
