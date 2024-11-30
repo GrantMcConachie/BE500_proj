@@ -3,7 +3,10 @@ from scipy import stats
 import matplotlib.pyplot as plt
 
 
-SEED = 12345  # unsure how to use this in a point process
+# For Generating different figures
+stochastic = True
+fig_5 = True
+sin_E = False
 
 
 # stochastic process functions
@@ -91,9 +94,6 @@ def lam_fn(lam, dlam=0.01):
 
 
 # running simulations
-stochastic = True
-fig_5 = False
-sin_E = True
 C_vals = []
 S_vals = []
 lam_vals = []
@@ -177,8 +177,8 @@ fig.tight_layout()
 
 # fig4c
 fig, axs = plt.subplots()
-axs.plot(range(len(S_vals)), S_vals, label='S')
-axs.plot(range(len(V_vals)), V_vals, label='V')
+axs.plot(range(len(S_vals)), S_vals, label='S', color='red', linestyle='--')
+axs.plot(range(len(V_vals)), V_vals, label='V', color='blue')
 axs.set_xlabel('time (weeks)')
 fig.legend()
 fig.tight_layout()
